@@ -4,6 +4,7 @@ export * from './bing';
 export * from './google';
 export * from './here';
 export * from './latlng';
+export * from './wmoid';
 export * from './mapbox';
 export * from './mapquest';
 export * from './neutrino';
