@@ -45,13 +45,11 @@ export class WmoId implements IGeocoder {
 		found.push(this.options.summary.features[i]);
 	    }
 	}
-	if (found) {
+	if (found.length > 0) {
             const results: GeocodingResult[] = [];
 
 	    for (var index = 0; index < found.length; index++) {
 		var f = found[index];
-		console.log(f, index);
-		
 		const center = L.latLng(f.geometry.coordinates[1],
 					f.geometry.coordinates[0],
 					f.geometry.coordinates[2]);
@@ -64,15 +62,16 @@ export class WmoId implements IGeocoder {
 			name:  f.properties.name,
 			id_type: f.properties.id_type
 		    }
-		  // 
+		    // 
 		};
 		// only the first 5 results
 		if (index > 5)
 		    break;
 	    };
 	    cb.call(context, results);
-	} else if (this.options.next) {
-	    this.options.next.geocode(query, cb, context);
+	} else
+	    if (this.options.next) {
+		this.options.next.geocode(query, cb, context);
 	}
     }
 }
